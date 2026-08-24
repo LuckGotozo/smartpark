@@ -3,12 +3,11 @@ package com.smartpark.smartpark.controller;
 import com.smartpark.smartpark.model.User;
 import com.smartpark.smartpark.service.UserService;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,21 +19,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
-
+    // Somente ADMIN consegue acessar por causa do SecurityConfig
     @GetMapping
     public List<User> getUsers() {
         return userService.getAllUsers();
     }
+
+    // Usuário consulta o próprio perfil pelo JWT
     @GetMapping("/me")
-public User getMyProfile(
-        @AuthenticationPrincipal Jwt jwt) {
+    public User getMyProfile(
+            @AuthenticationPrincipal Jwt jwt) {
 
-    Long userId = Long.valueOf(jwt.getSubject());
+        Long userId = Long.valueOf(jwt.getSubject());
 
-    return userService.getUserById(userId);
-}
+        return userService.getUserById(userId);
+    }
 }

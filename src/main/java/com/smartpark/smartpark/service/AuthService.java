@@ -10,6 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.smartpark.smartpark.dto.RegisterRequest;
+import com.smartpark.smartpark.model.Role;
+
 @Service
 public class AuthService {
 
@@ -58,4 +61,26 @@ public class AuthService {
                 token
         );
     }
+    public User register(RegisterRequest request) {
+
+    if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+        throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "Este e-mail já está cadastrado"
+        );
+    }
+
+    User user = new User();
+
+    user.setName(request.getName());
+    user.setEmail(request.getEmail());
+    user.setPassword(
+            passwordEncoder.encode(request.getPassword())
+    );
+
+    // Cadastro público SEMPRE cria usuário comum
+    user.setRole(Role.USER);
+
+    return userRepository.save(user);
+}
 }

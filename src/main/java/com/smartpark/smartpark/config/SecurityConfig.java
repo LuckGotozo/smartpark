@@ -47,14 +47,17 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        // Login público
-                        .requestMatchers("/api/auth/**").permitAll()
+        // Login e cadastro públicos
+        .requestMatchers("/api/auth/**").permitAll()
 
-                        // Perfil do próprio usuário
-                        .requestMatchers(
-                                org.springframework.http.HttpMethod.GET,
-                                "/api/users/me"
-                        ).authenticated()
+        // Permite que o Spring retorne erros corretamente
+        .requestMatchers("/error").permitAll()
+
+        // Perfil do próprio usuário
+        .requestMatchers(
+                org.springframework.http.HttpMethod.GET,
+                "/api/users/me"
+        ).authenticated()
 
                         // Lista de usuários: somente ADMIN
                         .requestMatchers(
