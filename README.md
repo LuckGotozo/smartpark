@@ -8,7 +8,7 @@ O **SmartPark** é um projeto Full Stack desenvolvido com o objetivo de colocar 
 
 ## 💻 Frontend
 
-🔗 [Repositório do SmartPark Frontend](https://github.com/LuckGotoz0/smartpark)
+🔗 [Repositório do SmartPark Frontend](https://github.com/LuckGotozo/smartpark-frontend)
 
 ---
 
