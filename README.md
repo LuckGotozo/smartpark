@@ -275,7 +275,7 @@ http://localhost:8080
 
 O frontend foi desenvolvido separadamente utilizando **React + JavaScript**.
 
-🔗 [Acessar repositório do frontend](https://github.com/LuckGotoz0/smartpark-frontend)
+🔗 [Acessar repositório do frontend](https://github.com/LuckGotozo/smartpark-frontend)
 
 ---
 
